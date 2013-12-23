@@ -417,7 +417,7 @@ framePlugins.crlogo = {
     },
     
     _controller: null,
-    _screen: screen,
+    _screen: tmaScreen,
     _vertexShader: '',
     _fragmentShader: '',
     _program: null,

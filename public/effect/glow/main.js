@@ -63,11 +63,11 @@ effectPlugins.glow = {
     },
     
     _controller: null,
-    _screen: screen,
+    _screen: tmaScreen,
     _vertexShader: '',
     _fragmentShader: '',
     _noEffectFragmentShader: '',
     _program: null,
     _noEffect: null,
-    _coords: screen.createBuffer([0, 0, 0, 1, 1, 1, 1, 0])
+    _coords: tmaScreen.createBuffer([0, 0, 0, 1, 1, 1, 1, 0])
 };

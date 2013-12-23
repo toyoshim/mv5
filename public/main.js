@@ -45,22 +45,23 @@ tma.onload = function () {
     var pluginReady = false;
 
     // Create main screen.
-    screen = new TmaScreen(512, 512, TmaScreen.MODE_3D);
-    screen.setAlphaMode(true, screen.gl.SRC_ALPHA, screen.gl.ONE);
-    screen.attachTo(TmaScreen.BODY);
-    screen.aspect = 1;
+    tmaScreen = new TmaScreen(512, 512, TmaScreen.MODE_3D);
+    tmaScreen.setAlphaMode(true, tmaScreen.gl.SRC_ALPHA, tmaScreen.gl.ONE);
+    tmaScreen.attachTo(TmaScreen.BODY);
+    tmaScreen.aspect = 1;
     window.onresize = function() {
-        screen.canvas.style.width = window.innerWidth + 'px';
-        screen.canvas.style.height = window.innerHeight + 'px';
-        screen.aspect = screen.canvas.clientWidth / screen.canvas.clientHeight;
-        console.log('resize: ' +
-                screen.canvas.clientWidth + 'x' + screen.canvas.clientHeight);
+        tmaScreen.canvas.style.width = window.innerWidth + 'px';
+        tmaScreen.canvas.style.height = window.innerHeight + 'px';
+        tmaScreen.aspect =
+                tmaScreen.canvas.clientWidth / tmaScreen.canvas.clientHeight;
+        console.log('resize: ' + tmaScreen.canvas.clientWidth + 'x' +
+                tmaScreen.canvas.clientHeight);
         if (!pluginReady)
             return;
         for (var frame in framePlugins)
-            framePlugins[frame].resize(screen.aspect);
+            framePlugins[frame].resize(tmaScreen.aspect);
         for (var effect in effectPlugins)
-            effectPlugins[effect].resize(screen.aspect);
+            effectPlugins[effect].resize(tmaScreen.aspect);
     };
     window.onresize();
 
@@ -91,24 +92,25 @@ tma.onload = function () {
         player.play();
         var requestAnimationFrame = window.webkitRequestAnimationFrame ||
                 window.mozRequestAnimationFrame;
-        var fbo = screen.createFrameBuffer(screen.width, screen.height);
+        var fbo =
+                tmaScreen.createFrameBuffer(tmaScreen.width, tmaScreen.height);
 
         var loop = function (time) {
             var delta = time - startTime;
             startTime = time;
             player.update();
             fbo.bind();
-            screen.fillColor(0.0, 0.0, 0.0, 1.0);
+            tmaScreen.fillColor(0.0, 0.0, 0.0, 1.0);
             framePlugins['wired'].draw(delta);
             framePlugins['crlogo'].draw(delta);
 
-            screen.bind();
-            screen.fillColor(0.0, 0.0, 0.0, 1.0);
+            tmaScreen.bind();
+            tmaScreen.fillColor(0.0, 0.0, 0.0, 1.0);
             effectPlugins['glow'].draw(delta, fbo.texture);
             framePlugins['snow'].draw(delta);
-            screen.flush();
+            tmaScreen.flush();
 
-            requestAnimationFrame(loop, screen.canvas);
+            requestAnimationFrame(loop, tmaScreen.canvas);
         };
         var startTime = window.mozAnimationStartTime || Date.now();
         startTime -= 0.1;

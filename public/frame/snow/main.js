@@ -99,7 +99,7 @@ framePlugins.snow = {
     },
     
     _controller: null,
-    _screen: screen,
+    _screen: tmaScreen,
     _vertexShader: '',
     _fragmentShader: '',
     _program: null,
@@ -108,5 +108,5 @@ framePlugins.snow = {
     _data: null,
     _aspect: 1.0,
     _ps: null,
-    _coords: screen.createBuffer([0, 0, 0, 1, 1, 1, 1, 0])
+    _coords: tmaScreen.createBuffer([0, 0, 0, 1, 1, 1, 1, 0])
 };

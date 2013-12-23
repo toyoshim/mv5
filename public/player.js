@@ -1,5 +1,7 @@
 player = (function() {
-    var context = new webkitAudioContext();
+    if (!window['AudioContext'])
+        AudioContext = webkitAudioContext;
+    var context = new AudioContext();
     var list = [
         [
             'songs/05 Pure Snows.mp3',
