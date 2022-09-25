@@ -7,5 +7,14 @@
 <script src="promise.js"></script>
 <script src="tmalib/tma.js"></script>
 <script src="main.js"></script>	
+<script>
+window.clicked = false;
+document.onclick = e => {
+  if (window.clicked)
+    return;
+  player.play();
+  window.clicked = true;
+}
+</script>
 </body>
 </html>
